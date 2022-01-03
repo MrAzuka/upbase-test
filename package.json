@@ -1,0 +1,32 @@
+{
+  "name": "upbase-test",
+  "version": "1.0.0",
+  "description": "Simple User Management REST API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrAzuka/upbase-test.git"
+  },
+  "keywords": [],
+  "author": "MrAzuka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrAzuka/upbase-test/issues"
+  },
+  "homepage": "https://github.com/MrAzuka/upbase-test#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.4",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
