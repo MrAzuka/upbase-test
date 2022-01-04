@@ -5,7 +5,7 @@ require('dotenv').config()
 const { JWT_SECRET, JWT_EXPIRES } = process.env
 
 exports.createAccount = async (req, res) => {
-    const { firstName, lastName, email, password, profile_pic } = req.body
+    const { firstName, lastName, email, password } = req.body
     try {
         const salt = await bcrypt.genSalt(11)
         const hashedPassword = await bcrypt.hash(password, salt)
@@ -14,10 +14,16 @@ exports.createAccount = async (req, res) => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: hashedPassword
+            password: hashedPassword,
         })
         const newUser = await createUser.save()
-        res.status(200).json({ message: "User created" })
+        const token = jwt.sign({
+            id: __id, email: email, firstName: firstName,
+            lastName: lastName
+        }, JWT_SECRET, {
+            expiresIn: JWT_EXPIRES,
+        })
+        res.status(200).json({ message: "User created", token })
     } catch (err) {
         console.log(err)
         res.status(500).json({ Error: err })
@@ -47,6 +53,17 @@ exports.loginAccount = async (req, res) => {
         })
 
         res.status(200).json({ message: "User loggedIn", token })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ Error: err })
+    }
+}
+
+exports.deleteAccount = async (req,res) => {
+    const {__id} = req.user
+    try{
+        const deleteUser = await User.findByIdAndDelete(__id)
+        res.status(200).json("User Deleted Succsessfully")
     } catch (err) {
         console.log(err)
         res.status(500).json({ Error: err })
