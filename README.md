@@ -48,7 +48,8 @@ $ npm run test
 
 
 ## Documentation
-
+You can find the documentation of the endpoints on Postman 
+[Documentation Link](https://documenter.getpostman.com/view/12929004/UVXbuf2b)
 
 
 Thank You.

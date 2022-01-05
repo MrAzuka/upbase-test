@@ -1,15 +1,14 @@
 const { Router } = require('express')
 const router = Router()
-const { getProfile, updateProfile, addProfilePic } = require('../controllers/profileController')
+const { getProfile, updateProfile, addProfilePic, createProfilePic } = require('../controllers/profileController')
 const { upload } = require('../utils/imageUpload')
 const { authenticateUser} = require('../middleware/authentication')
 
 // PUT routes
 
-// @routes /profile-update/:id
+// @routes /profile-update/:email
 // @desc   Update Profile
-router.put('/profile-update/:id',authenticateUser, upload.single("MyFile"), updateProfile)
-
+router.put('/profile-update/:id',authenticateUser, upload.single("profile-pic"), updateProfile)
 
 
 // GET routes

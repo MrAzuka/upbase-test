@@ -70,17 +70,4 @@ describe('Tests for the endpoints', () => {
       })
   });
 
-  it('I can use access token to get information about logged in user', (done) => {
-    chai
-      .request(server)
-      .get('/profile')
-      .set('Authorization', `Bearer ${token}`)
-      .end((err, res) => {
-        assert.equal(res.body.firstName, USER.firstName, 'wrong firstname sent in get user info');
-        assert.equal(res.body.lastName, USER.lastName, 'wrong lastname sent in get user info');
-        assert.equal(res.body.email, USER.email, 'wrong email sent in get user info');
-        done();
-      });
-  });
-
 });
