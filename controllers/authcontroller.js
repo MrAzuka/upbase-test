@@ -67,3 +67,7 @@ exports.deleteAccount = async (req,res) => {
         res.status(500).json({ Error: err })
     }
 }
+
+exports.homePage = (req,res) => {
+    res.status(200).json("Welcome to My Home")
+}
