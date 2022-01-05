@@ -16,5 +16,6 @@ router.put('/profile-update/:id',authenticateUser, upload.single("MyFile"), upda
 
 // @routes /profile/:id
 // @desc   Get Profile
-router.get('/profile/:id', getProfile)
+router.get('/profile/:id', authenticateUser,getProfile)
 
+module.exports = router

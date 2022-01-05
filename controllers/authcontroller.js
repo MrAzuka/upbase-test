@@ -18,11 +18,9 @@ exports.createAccount = async (req, res) => {
         })
         const newUser = await createUser.save()
         const token = jwt.sign({
-            id: __id, email: email, firstName: firstName,
+             email: email, firstName: firstName,
             lastName: lastName
-        }, JWT_SECRET, {
-            expiresIn: JWT_EXPIRES,
-        })
+        }, JWT_SECRET)
         res.status(200).json({ message: "User created", token })
     } catch (err) {
         console.log(err)
@@ -33,14 +31,14 @@ exports.createAccount = async (req, res) => {
 
 
 exports.loginAccount = async (req, res) => {
-    const { email, password, __id } = req.body
+    const { email, password } = req.body
     try {
         // Check if email exist
         const user = await User.findOne({ email: email })
         if (!user) {
             res.status(400).json({ message: "Email doesn't exist" })
         }
-
+        console.log(user)
         // Check if password is a match
         const passwordMatch = await bcrypt.compare(password, user.password)
 
@@ -48,11 +46,11 @@ exports.loginAccount = async (req, res) => {
             res.status(400).json({ message: "Incorrect Password" })
         }
 
-        const token = jwt.sign({ id: __id, email: email }, JWT_SECRET, {
-            expiresIn: JWT_EXPIRES,
+        const token = jwt.sign({ email: email }, JWT_SECRET, {
+            expiresIn: '10h',
         })
 
-        res.status(200).json({ message: "User loggedIn", token })
+        res.status(200).json({ message: "User loggedIn", token, userId: user._id })
     } catch (err) {
         console.log(err)
         res.status(500).json({ Error: err })

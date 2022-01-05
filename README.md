@@ -31,7 +31,10 @@ $ npm start
 ```bash
 $ npm run dev
 ```
-
+- To run test
+```bash
+$ npm run test
+```
 
   ## Technology and Packages
 
